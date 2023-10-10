@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="To-Do List Application's Logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to To-Do List Web Application</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        body {
+            background-color: white;
+            color: darkblue;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 30px;
+        }
+
+        #app {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 200px;
+            margin-bottom: 20%;
+        }
+
+        #app h1 {
+            font-weight: bolder;
+            font-size: 50px;
+        }
+
+        .intro h1{
+            font-size: 65px;
+            text-align: left;
+        }
+
+        .intro p{
+            font-size: 20px;
+            line-height: 2;
+            text-align: left;
+        }
+
+        .intro{
+            margin-left: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 30px;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 30px;
+            background-color: white;
+        }
+
+        li.completed {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .task-text {
+            flex-grow: 1;
+            font-family: 'Poppins', sans-serif;
+            margin-right: 10px;
+        }
+
+        .delete-btn {
+            background-color: darkblue;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            border-radius: 30px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .topnav {
+            background-color: white;
+            margin-left: 26%;
+            width: 499px;
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .topnav a {
+            color: darkblue;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: white;
+            color: darkblue;
+        }
+
+        .topnav a.active {
+            background-color: white;
+            color: darkblue;
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+        }
+
+        #app input::placeholder {
+            font-size: 14px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="img-div">
+            <a href="Application.html">
+                <img src="To-Do List Application's Logo.png" alt="Logo" height="100px" width="100px">
+            </a>
+        </div>
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+        </div>
+    </div>
+    <div class="intro">
+        <h1><b>Welcome To,<br>To-Do List Web Application</b></h1>
+        <p>My To-Do List Web Application is a powerful tool designed to streamline your task management process. With<br>
+            its intuitive user interface and seamless synchronization across devices, you can easily organize your tasks <br>
+            and boost productivity. Whether you're at home or on the go, our user-friendly platform ensures you stay on <br>
+            top of your to-do list. Experience the convenience of efficient task management with our feature-rich <br>
+            application, helping you prioritize and accomplish tasks with ease.</p>
+    </div>
+    <div id="app">
+        <h1><b>Try it out &#9759;</b></h1>
+        <input type="text" id="taskInput" placeholder="Add a new task and press Enter...">
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        taskInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                addTask();
+            }
+        });
+
+        function addTask() {
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== '') {
+                const taskItem = document.createElement('li');
+                taskItem.innerHTML = `
+                    <span class="task-text">${taskText}</span>
+                    <button class="delete-btn">Delete</button>
+                `;
+
+                taskItem.querySelector('.delete-btn').addEventListener('click', () => {
+                    taskItem.remove();
+                });
+
+                taskItem.addEventListener('click', () => {
+                    taskItem.classList.toggle('completed');
+                });
+
+                taskList.appendChild(taskItem);
+                taskInput.value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
